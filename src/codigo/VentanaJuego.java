@@ -27,6 +27,7 @@ public class VentanaJuego extends javax.swing.JFrame {
     
     int filasMarcianos = 5;
     int columnasMarcianos = 10;
+    int contador = 0;
     
     BufferedImage buffer = null;
     
@@ -67,6 +68,7 @@ public class VentanaJuego extends javax.swing.JFrame {
         temporizador.start();
     }
         //CREO EL METODO DEL BUCLE DEL JUEGO QUE NO DEVUELVE NADA POR ESO ES PRIVATE VOID
+    
         private void bucleDelJuego(){
             //ESTE METODO (BUCLE DE JUEGO) GOBBIERNA EL REDIBUJADO DE LOS OBJETOS EN EL JPANEL.
             
@@ -78,8 +80,18 @@ public class VentanaJuego extends javax.swing.JFrame {
             //creo pintar un cuadro de las siguiente dimensiones
             g2.fillRect (0, 0, ANCHOPANTALLA, ALTOPANTALLA);
             
-            ////////////////////////////////////
+            //CADA VEZ QUE EL TEMPORIZADOR EMPIEZA CADA 10 MS LLAMA AL JUEGO
+            
+            contador++;
+            
+            if (contador < 50){         
             g2.drawImage (miMarciano.imagen1, 10, 10, null);
+        } else if (contador < 100){
+                g2.drawImage (miMarciano.imagen2, 10, 10, null);
+        } else {
+                            contador = 0;
+                    }
+            
             
             ////////////////////////////////////
             
