@@ -45,6 +45,9 @@ public class VentanaJuego extends javax.swing.JFrame {
             bucleDelJuego();
         }
     });
+    
+    //DECLARAMOS UNA VARIABLE DE INSTANCIA
+        Marciano miMarciano = new Marciano (ANCHOPANTALLA);
    
 
     /**
@@ -76,14 +79,16 @@ public class VentanaJuego extends javax.swing.JFrame {
             g2.fillRect (0, 0, ANCHOPANTALLA, ALTOPANTALLA);
             
             ////////////////////////////////////
-            
+            g2.drawImage (miMarciano.imagen1, 10, 10, null);
             
             ////////////////////////////////////
+            
             //DIBUJO DE GOLPE TODO EL BUFFER SOBRE JPANEL1.
             g2 = (Graphics2D)jPanel2.getGraphics();
             g2.drawImage(buffer, 0, 0, null);
             
         }
+        
 
     /**
      * This method is called from within the constructor to initialize the form.
