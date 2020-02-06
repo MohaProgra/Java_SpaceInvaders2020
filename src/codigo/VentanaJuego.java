@@ -49,6 +49,9 @@ public class VentanaJuego extends javax.swing.JFrame {
     
     //DECLARAMOS UNA VARIABLE DE INSTANCIA
         Marciano miMarciano = new Marciano (ANCHOPANTALLA);
+        Nave miNave = new Nave();
+       
+        
    
 
     /**
@@ -66,6 +69,9 @@ public class VentanaJuego extends javax.swing.JFrame {
         
         //ARRANCO EL TEMPORIZADOR PARA QUE EMPIECE EL JUEGO
         temporizador.start();
+         //LE ASIGNAMOS UNAS COORDENADAS A LA NAVE
+        miNave.posX =  ANCHOPANTALLA/2 - miNave.imagen.getWidth(this)/2;
+        miNave.posY = ALTOPANTALLA - 100;
     }
         //CREO EL METODO DEL BUCLE DEL JUEGO QUE NO DEVUELVE NADA POR ESO ES PRIVATE VOID
     
@@ -94,6 +100,10 @@ public class VentanaJuego extends javax.swing.JFrame {
             
             
             ////////////////////////////////////
+            
+            //DIBUJO LA NAVE
+            g2. drawImage (miNave.imagen, miNave.posX, miNave.posY, null);
+            
             
             //DIBUJO DE GOLPE TODO EL BUFFER SOBRE JPANEL1.
             g2 = (Graphics2D)jPanel2.getGraphics();
