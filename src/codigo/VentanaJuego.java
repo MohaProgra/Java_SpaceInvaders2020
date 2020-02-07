@@ -50,11 +50,14 @@ public class VentanaJuego extends javax.swing.JFrame {
     
     //DECLARAMOS UNA VARIABLE DE INSTANCIA
         Marciano miMarciano = new Marciano (ANCHOPANTALLA);
-        Nave miNave = new Nave();
-       
         
-   
-
+        //ES PARA TODOS LOS MARCIANO. DECLARO UN ARRAY DE 2 DIMENSIONES.
+        Marciano [][] listaMarcianos = new Marciano [filasMarcianos][columnasMarcianos];
+        boolean direccionMarcianos = false;
+        
+        Nave miNave = new Nave();
+        Disparo miDisparo = new Disparo ();
+       
     /**
      * Creates new form VentanaJuego
      */
@@ -73,10 +76,52 @@ public class VentanaJuego extends javax.swing.JFrame {
          //LE ASIGNAMOS UNAS COORDENADAS A LA NAVE
         miNave.posX =  ANCHOPANTALLA/2 - miNave.imagen.getWidth(this)/2;
         miNave.posY = ALTOPANTALLA - 100;
+        
+        for (int i=0 ; i<filasMarcianos; i++){
+            for (int j=0 ; j<columnasMarcianos; j++){
+                listaMarcianos [i][j] = new Marciano (ANCHOPANTALLA);
+                listaMarcianos[i][j].posX = j*(15+listaMarcianos [i][j].imagen1.getWidth(null));
+                listaMarcianos[i][j].posY = i*(10+listaMarcianos[i][j].imagen1.getHeight(null));
+            }
+        }
     }
+    
+         private void pintaMarcianos(Graphics2D _g2){
+             
+          for (int i=0 ; i<filasMarcianos; i++){
+            for (int j=0 ; j<columnasMarcianos; j++){
+                
+                
+                listaMarcianos [i][j]. mueve(direccionMarcianos);
+                        if(listaMarcianos[i][j].posX >= ANCHOPANTALLA-listaMarcianos[i][j].imagen1.getWidth(null))
+                        {
+                            direccionMarcianos = !direccionMarcianos;
+                            
+                        }
+                        if(listaMarcianos[i][j].posX <=0){
+                            direccionMarcianos=!direccionMarcianos;
+                        }
+                if (contador < 50){
+                    _g2.drawImage(listaMarcianos [i][j].imagen1, listaMarcianos[i][j].posX, listaMarcianos[i][j].posY, null);
+                            
+                }
+                else if (contador < 100){
+                    _g2.drawImage(listaMarcianos[i][j].imagen2, listaMarcianos[i][j].posX, listaMarcianos[i][j].posY, null);
+                }
+                else {
+                    contador = 0;
+            }
+        }
+    }
+
+         }  
+    
+           
+    
         //CREO EL METODO DEL BUCLE DEL JUEGO QUE NO DEVUELVE NADA POR ESO ES PRIVATE VOID
     
         private void bucleDelJuego(){
+                   
             //ESTE METODO (BUCLE DE JUEGO) GOBBIERNA EL REDIBUJADO DE LOS OBJETOS EN EL JPANEL.
             
             
@@ -91,22 +136,20 @@ public class VentanaJuego extends javax.swing.JFrame {
             
             contador++;
             
-            if (contador < 50){         
-            g2.drawImage (miMarciano.imagen1, 10, 10, null);
-        } else if (contador < 100){
-                g2.drawImage (miMarciano.imagen2, 10, 10, null);
-        } else {
-                            contador = 0;
-                    }
+          pintaMarcianos(g2);        
+           
+                    
             
             
             ////////////////////////////////////
             
             //DIBUJO LA NAVE
             g2. drawImage (miNave.imagen, miNave.posX, miNave.posY, null);
+            g2. drawImage (miDisparo.imagen, miDisparo.posX,miDisparo.posY, null);
+            
             //LE DECIMOS A MI NAVE QUE SI LA NAVE TIENE A TRUE EL LA DEREHA LO MOVERA
             miNave.mueve();
-            
+            miDisparo.mueve();
             
             //DIBUJO DE GOLPE TODO EL BUFFER SOBRE JPANEL1.
             g2 = (Graphics2D)jPanel2.getGraphics();
@@ -182,8 +225,9 @@ public class VentanaJuego extends javax.swing.JFrame {
         switch(evt.getKeyCode()){
             case KeyEvent.VK_LEFT : miNave.setPulsadoIzquierda(true); break;
             case KeyEvent.VK_RIGHT : miNave.setPulsadoDerecha(true); break;
-            
-        }
+            case KeyEvent.VK_SPACE : miDisparo.posicionDisparo(miNave);
+                                     break;
+    }
     }//GEN-LAST:event_formKeyPressed
 
     private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
