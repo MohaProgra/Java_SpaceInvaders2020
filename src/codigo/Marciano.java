@@ -17,12 +17,24 @@ public class Marciano {
     
     public Image imagen1 = null;
     public Image imagen2 = null;
+    
+    public int posX = 0;
+    public int posY = 0;
  
         //PARA QUE EL MARCIANO SEPA CUANDO MIDE LA PANTALLA DE ANCHO PARA QUE SEPA QUE HA LLEGADO AL FINAL DE LA PANTALLA
        private int anchoPantalla; 
 
        //DECLARO UN PUBLIC
        public int vida = 50;
+       
+       public void mueve (boolean direccion){
+           if (direccion){
+               posX++;
+           }
+           else{posX--;
+           
+           }
+       }
        
        //NECESITO UN CONSTRUCTOR QUE SE LLAMA IGUAL QUE LA CLASE MARCIANO Y A ESTE CONSTRCUTOR LE PASO UN INTEGER QUE
        //ES EL ANCHO DE PANTALLA 
@@ -31,15 +43,10 @@ public class Marciano {
            anchoPantalla = _anchoPantalla;
            
            //PARA CARGAR LAS IMAGENES Y SINO ME DEJA PONGO EL CATCH PARA QUE SALGA UN TEXTO DE ERROR
-           try {
-               imagen1 = ImageIO.read(getClass().getResource("/imagenes/marcianito1.png"));
-               imagen2 = ImageIO.read(getClass().getResource("/imagenes/marcianito2.png"));
-           }
-            catch(Exception e){
-                
-            }
-            }
+           
+       
        }
+}
     
 
 

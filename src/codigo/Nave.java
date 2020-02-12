@@ -22,13 +22,7 @@ public class Nave {
     private boolean pulsadoDerecha = false;
     
    public Nave (){
-       try {
-               imagen = ImageIO.read(getClass().getResource("/imagenes/nave.png"));
-               
-           }
-            catch(Exception e){
-                
-            }
+       
    }
     
    //METODO NUEVO QUE CHEQUE LAS VARIABLES PRIVADAS
